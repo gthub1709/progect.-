@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Чат-Бот «ЧЁ ТЫ ХОЧЕШЬ?»</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(255, 0, 0, 0.7));
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-container {
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 20px;
+      border-radius: 10px;
+      width: 450px;
+      box-shadow: 0 0 25px #f00;
+    }
+
+    #chat-box {
+      height: 300px;
+      overflow-y: auto;
+      background-color: rgba(40, 40, 40, 0.9);
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-family: 'Courier New', monospace;
+    }
+
+    input {
+      width: 70%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #444;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+    }
+
+    button {
+      width: 25%;
+      padding: 10px;
+      background-color: #d50000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #f44336;
+    }
+
+    strong {
+      color: #f33;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Что тебе нужно?" />
+    <button onclick="sendMessage()">Отправить</button>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage("Ты", message);
+      userInput.value = "";
+
+      setTimeout(() => {
+        respondWithAttitude();
+      }, 600);
+    }
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement("div");
+      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function respondWithAttitude() {
+      const replies = [
+        "Ты что, сюда пришёл просто так?",
+        "Да тебе тут никто ничего не скажет, если не объяснишь, чего тебе нужно.",
+        "Я не обязана отвечать на глупые вопросы.",
+        "Почему ты думаешь, что я буду тратить время на твою чушь?",
+        "Ты серьёзно думаешь, что кто-то будет с тобой долго разговаривать?",
+        "Если ты пришёл за помощью, будь поумнее.",
+        "Не понимаю, зачем ты пишешь, если не можешь сформулировать нормально.",
+        "Ты тут вообще по делу или просто так решил потрендеть?",
+        "Слушай, мне не интересно болтать о пустяках.",
+        "Если хочешь нормальный ответ, задавай нормальные вопросы."
+      ];
+
+      const reply = replies[Math.floor(Math.random() * replies.length)];
+      appendMessage("Бот", reply);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
